@@ -30,7 +30,7 @@ export default function Header() {
         <Link href="/">
           <Image
             priority={true}
-            className="dark:invert cursor-pointer"
+            className="cursor-pointer"
             src="/LoGo.svg"
             alt="logo"
             width={192}

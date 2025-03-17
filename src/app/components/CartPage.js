@@ -107,7 +107,7 @@ export default function CartPage() {
       const data = await response.json();
       
       if (!response.ok) {
-        throw new Error(data.error || "Update error");
+        throw new Error(data.error ||  "Update error");
       }
   
       setCartItems(prev => prev.map(item => 
@@ -130,8 +130,7 @@ export default function CartPage() {
       total + (item.quantity * item.price_per_gram), 0
     ).toFixed(2);
   };
-
-  const ConfirmModal = () => (
+const ConfirmModal = () => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg max-w-sm w-full">
         <p className="mb-4 text-lg">Are you sure you want to remove this item?</p>
@@ -205,8 +204,7 @@ export default function CartPage() {
       const data = await response.json();
 
       if (!response.ok) throw new Error(data.error || "Ошибка при создании заказа");
-
-      // Очищаем корзину
+// Очищаем корзину
       setCartItems([]);
       setIsOrderModalOpen(false);
       setOrderSuccess(true);
@@ -274,9 +272,7 @@ export default function CartPage() {
       </div>
     );
   };
-  
-
-  const SuccessMessage = () => (
+const SuccessMessage = () => (
     <div className="fixed top-4 right-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
       Order placed successfully!
     </div>
@@ -365,8 +361,7 @@ export default function CartPage() {
                 </div>
               ))}
             </div>
-
-            <div className="bg-gray-50 p-6 rounded-lg sticky top-4">
+<div className="bg-gray-50 p-6 rounded-lg sticky top-4">
               <div className="flex justify-between items-center mb-4">
                 <span className="text-xl">Total:</span>
                 <span className="text-2xl font-bold">${calculateTotal()}</span>
@@ -383,7 +378,14 @@ export default function CartPage() {
       </div>
 
       {orderSuccess && <SuccessMessage />}
-      {isOrderModalOpen && <OrderModal />}
+      {isOrderModalOpen && (
+  <OrderModal
+    address={address}
+    setAddress={setAddress}
+    setIsOrderModalOpen={setIsOrderModalOpen}
+    handleSubmitOrder={handleSubmitOrder}
+  />
+)}
       {showConfirmModal && <ConfirmModal />}
       {showErrorModal && <ErrorModal />}
     </div>

@@ -3,6 +3,6 @@ import mysql from 'mysql2/promise';
 export const db = mysql.createPool({
   host: '127.0.0.1',
   user: 'root',
-  password: 'Smirn0v1221',
-  database: `TeaShop`
+  password: '',
+  database: `teashop`
 });
