@@ -1,23 +1,22 @@
-"use client";
+'use client';
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-
-export default function LogoutButton() {
+export default function LogoutButton({ setUser }) {
   const router = useRouter();
   const [showAlert, setShowAlert] = useState(false);
 
   const handleLogout = async () => {
     localStorage.removeItem("user");
-    localStorage.removeItem("cart_id");
-    localStorage.removeItem("token");
+    setUser(null); // Update the user state to null
     setShowAlert(true);
     setTimeout(() => {
       setShowAlert(false);
       router.push("/");
     }, 2000);
   };
+
 
   return (
     <>

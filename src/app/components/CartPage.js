@@ -183,6 +183,9 @@ const ConfirmModal = () => (
       </div>
     );
   }
+
+
+
   const handleSubmitOrder = async () => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
@@ -190,33 +193,44 @@ const ConfirmModal = () => (
         router.push("/account");
         return;
       }
-
+  
+      console.log("Отправляем адрес:", address); // Лог для проверки перед отправкой
+  
       const response = await fetch("/api/order/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           user_id: user.id,
-          address,
+          address,  // Теперь передается полный адрес
           payment_method: paymentMethod
         }),
       });
-
+  
       const data = await response.json();
-
       if (!response.ok) throw new Error(data.error || "Ошибка при создании заказа");
-// Очищаем корзину
+  
       setCartItems([]);
       setIsOrderModalOpen(false);
       setOrderSuccess(true);
-      setTimeout(() => {setOrderSuccess(false);
-        router.push("/account");}, 3000);
+      setTimeout(() => {
+        setOrderSuccess(false);
+        router.push("/account");
+      }, 3000);
     } catch (error) {
+      console.error("Ошибка при создании заказа:", error);
       setErrorMessage(error.message);
       setShowErrorModal(true);
     }
   };
+  
+
+ 
   const OrderModal = ({ address, setAddress, setIsOrderModalOpen, handleSubmitOrder }) => {
-    const [tempAddress, setTempAddress] = useState(address); // Временное состояние
+    const [tempAddress, setTempAddress] = useState(address); // Временный стейт для корректного ввода
+  
+    useEffect(() => {
+      setTempAddress(address); // Обновляем, если переданный адрес изменился
+    }, [address]);
   
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -226,8 +240,9 @@ const ConfirmModal = () => (
           <div className="mb-4">
             <label className="block mb-2 font-medium">Delivery Address</label>
             <textarea
-              value={tempAddress}
-              onChange={(e) => setTempAddress(e.target.value)} // Обновляем временный адрес
+              value={tempAddress} // Ввод теперь работает без багов
+              onChange={(e) => setTempAddress(e.target.value)} // Локально обновляем
+              onBlur={() => setAddress(tempAddress)} // Записываем в основной стейт при потере фокуса
               className="w-full p-2 border rounded"
               rows="3"
               placeholder="Enter delivery address"
@@ -253,14 +268,17 @@ const ConfirmModal = () => (
   
           <div className="flex gap-4 justify-end">
             <button
-              onClick={() => setIsOrderModalOpen(false)}
+              onClick={() => {
+                setAddress(tempAddress); // Фиксим потерю данных при закрытии
+                setIsOrderModalOpen(false);
+              }}
               className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300"
             >
               Cancel
             </button>
             <button
               onClick={() => {
-                setAddress(tempAddress); // Устанавливаем адрес только после подтверждения
+                setAddress(tempAddress); // Перед отправкой точно записываем
                 handleSubmitOrder();
               }}
               className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
@@ -272,11 +290,26 @@ const ConfirmModal = () => (
       </div>
     );
   };
+  
+
+
+
+
+
+
+
+
+
+
 const SuccessMessage = () => (
     <div className="fixed top-4 right-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
       Order placed successfully!
     </div>
   );
+
+
+
+
   return (
   
     <div>

@@ -14,7 +14,7 @@ export async function POST(req) {
 
     const cart_id = cart[0].id;
 
-    // Получаем товары из корзины
+    
     const [cartItems] = await db.query(
       `SELECT ci.product_id, ci.quantity, p.price_per_gram 
        FROM cart_items ci

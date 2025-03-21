@@ -7,7 +7,7 @@ export async function POST(req) {
     const { login, password } = await req.json();
 
     const [users] = await db.query(
-      'SELECT id, name, email, password_hash FROM users WHERE login = ?', 
+      'SELECT id, name, email, password_hash, role FROM users WHERE login = ?', 
       [login]
     );
 
