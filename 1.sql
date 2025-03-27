@@ -130,12 +130,12 @@ INSERT INTO products (image, name, collection, price_per_gram, country, flavor, 
 ('/products/green/6.jpg', 'Genmaicha', 'green tea', 0.08, 'Japan', 'Toasty, Nutty', 'Comforting, Smooth', 'Medium', 'None'),
 
 -- White Tea
-('/products/white/1.jpg', 'Silver Needle', 'white teas', 0.03, 'China', 'Honey, Floral', 'Delicate, Smooth', 'Low', 'None'),
-('/products/white/2.jpg', 'White Peony', 'white teas', 0.05, 'China', 'Mellow, Sweet', 'Refreshing, Light', 'Low', 'None'),
-('/products/white/3.jpg', 'Moonlight White', 'white teas', 0.04, 'China', 'Fruity, Floral', 'Soft, Complex', 'Low', 'None'),
-('/products/white/4.jpg', 'Darjeeling White', 'white teas', 0.05, 'India', 'Floral, Muscatel', 'Elegant, Crisp', 'Low', 'None'),
-('/products/white/5.jpg', 'Shou Mei', 'white teas', 0.06, 'China', 'Earthy, Nutty', 'Bold, Smooth', 'Low', 'None'),
-('/products/white/6.jpg', 'Bai Mu Dan', 'white teas', 0.04, 'China', 'Herbal, Fruity', 'Light, Aromatic', 'Low', 'None'),
+('/products/white/1.jpg', 'Silver Needle', 'white tea', 0.03, 'China', 'Honey, Floral', 'Delicate, Smooth', 'Low', 'None'),
+('/products/white/2.jpg', 'White Peony', 'white tea', 0.05, 'China', 'Mellow, Sweet', 'Refreshing, Light', 'Low', 'None'),
+('/products/white/3.jpg', 'Moonlight White', 'white tea', 0.04, 'China', 'Fruity, Floral', 'Soft, Complex', 'Low', 'None'),
+('/products/white/4.jpg', 'Darjeeling White', 'white tea', 0.05, 'India', 'Floral, Muscatel', 'Elegant, Crisp', 'Low', 'None'),
+('/products/white/5.jpg', 'Shou Mei', 'white tea', 0.06, 'China', 'Earthy, Nutty', 'Bold, Smooth', 'Low', 'None'),
+('/products/white/6.jpg', 'Bai Mu Dan', 'white tea', 0.04, 'China', 'Herbal, Fruity', 'Light, Aromatic', 'Low', 'None'),
 
 -- Oolong Tea
 ('/products/oolong/1.jpg', 'Tie Guan Yin', 'oolong', 0.07, 'China', 'Floral, Creamy', 'Smooth, Refreshing', 'Medium', 'None'),

@@ -9,11 +9,12 @@ export default function LogoutButton({ setUser }) {
 
   const handleLogout = async () => {
     localStorage.removeItem("user");
-    setUser(null); // Update the user state to null
+    localStorage.removeItem("cart_id");
+    setUser(null); 
     setShowAlert(true);
     setTimeout(() => {
       setShowAlert(false);
-      router.push("/");
+      router.push("/account");
     }, 2000);
   };
 

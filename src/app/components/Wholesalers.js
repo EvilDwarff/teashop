@@ -23,9 +23,9 @@ export default function Wholesalers() {
 
 We offer customizable options to match your brand and flexible ordering to support your needs. Partner with us to create unique tea experiences for your customers.
 </p>
-                <button className="border border-black text-black text-[14px] font-medium w-[281px] h-[56px] flex items-center justify-center hover:bg-gray-300 mt-4">
+                {/* <button className="border border-black text-black text-[14px] font-medium w-[281px] h-[56px] flex items-center justify-center hover:bg-gray-300 mt-4">
                     GET A FREE CONSULTATION
-                </button>
+                </button> */}
             </div>
             <div className="w-1/2 flex justify-end">
                 <Image

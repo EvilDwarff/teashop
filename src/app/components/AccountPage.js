@@ -6,6 +6,10 @@ import Login from "./Login";
 import Register from "./Register";
 import Header from "./Header";
 import LogoutButton from "./LogoutButton";
+import { Prosto_One, Montserrat } from "next/font/google";
+
+const prostoOne = Prosto_One({ weight: "400", subsets: ["latin"] });
+const montserrat = Montserrat({ weight: "400", subsets: ["latin"] });
 
 export default function AccountPage() {
   const [user, setUser] = useState(null);
@@ -57,7 +61,7 @@ export default function AccountPage() {
 
   const fetchOrderDetails = async (orderId) => {
     if (!orderId) {
-      console.error("❌ Ошибка: Order ID не передан!");
+      console.error(" Ошибка: Order ID не передан!");
       return;
     }
 
@@ -76,10 +80,10 @@ export default function AccountPage() {
         console.log("📦 Получены детали заказа:", data);
         setOrderDetails(data.items || []); // Исправлено на `data.items`
       } else {
-        console.error("❌ Ошибка API:", data.error);
+        console.error(" Ошибка API:", data.error);
       }
     } catch (error) {
-      console.error("❌ Ошибка загрузки деталей заказа:", error);
+      console.error(" Ошибка загрузки деталей заказа:", error);
     }
   };
 
@@ -107,7 +111,7 @@ export default function AccountPage() {
       ) : (
         <div className="flex flex-col items-center justify-center flex-grow">
           <div className="bg-white p-8 shadow-md rounded-lg w-96 text-center">
-            <h2 className="text-xl font-semibold">Account Information</h2>
+            <h2 className={`${prostoOne.className} text-xl font-semibold`}>Account Information</h2>
             <p className="mt-4 text-gray-700">
               <strong>Name:</strong> {user.name || "Not provided"}
             </p>
@@ -116,34 +120,34 @@ export default function AccountPage() {
             </p>
 
             <div className="border-t pt-6">
-              <h3 className="text-xl font-semibold mb-4">История заказов</h3>
+              <h3 className={`${prostoOne.className} text-xl font-semibold mb-4`}>Order History</h3>
               {loading ? (
-                <p>Загрузка заказов...</p>
+                <p>Loading orders...</p>
               ) : orders.length === 0 ? (
-                <p>У вас пока нет заказов</p>
+                <p>You have no orders yet</p>
               ) : (
                 <div className="space-y-4">
                   {orders.map((order) => (
                     <div key={order.order_id} className="border rounded-lg p-4">
                       <div className="flex justify-between items-center mb-2">
                         <span className="font-semibold">
-                          Заказ #{order.order_id}
+                          Order #{order.order_id}
                         </span>
                         <span className="text-sm text-gray-600">
                           {order.order_date}
                         </span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span>Статус: {order.order_status}</span>
+                        <span>Status: {order.order_status}</span>
                         <span className="font-semibold">
                           ${parseFloat(order.total_amount).toFixed(2)}
                         </span>
                       </div>
                       <button
-                        onClick={() => fetchOrderDetails(order.order_id)} // Передаем ID заказа
+                        onClick={() => fetchOrderDetails(order.order_id)} // Pass order ID
                         className="mt-2 text-blue-600 hover:underline"
                       >
-                        Показать детали
+                        Show Details
                       </button>
                     </div>
                   ))}
@@ -153,11 +157,11 @@ export default function AccountPage() {
 
             {orderDetails && (
               <div className="mt-4">
-                <h4 className="text-lg font-semibold">Детали заказа:</h4>
+                <h4 className={`${prostoOne.className} text-lg font-semibold`}>Order Details:</h4>
                 <ul className="list-disc list-inside">
                   {orderDetails.map((item) => (
                     <li key={item.name}>
-                      {item.name}<br/> Количество: {item.quantity} - Цена: $
+                      {item.name} <br /> Quantity: {item.quantity} - Price: $
                       {item.price}
                     </li>
                   ))}
@@ -165,7 +169,7 @@ export default function AccountPage() {
               </div>
             )}
 
-            <LogoutButton />
+            <LogoutButton setUser={setUser} />
           </div>
         </div>
       )}

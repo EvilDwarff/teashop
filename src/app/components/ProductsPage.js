@@ -53,9 +53,7 @@ export default function Products() {
       <div className="w-full h-[350px] relative">
         <Image src="/banner.png" alt="Products Banner" layout="fill" objectFit="cover" />
       </div>
-      <div className={`${prostoOne.className} text-4xl leading-[14px] px-8 py-4 text-gray-600`}>
-        <span>Home</span> &gt; <span className="text-black font-medium">Products</span>
-      </div>
+    
       <div className="flex px-8 py-6">
         <div className="w-1/8 p-4 border-r">
           <h2 className="text-lg font-semibold mb-4">Collections</h2>

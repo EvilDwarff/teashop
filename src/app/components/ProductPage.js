@@ -101,24 +101,34 @@ export default function ProductPage() {
     }
   };
 
-  if (!product) return <p className="text-center text-gray-600 mt-8">Loading...</p>;
+  if (!product)
+    return <p className="text-center text-gray-600 mt-8">Loading...</p>;
 
   return (
     <div>
       <Header />
-      <div className="p-4 max-w-4xl mx-auto">
+      <div className={`${montserrat.className} p-4 max-w-4xl mx-auto`}>
         <div className="flex gap-8 items-center">
           <div className="w-1/2 h-[300px] flex justify-center items-center">
-            <Image src={product.image} alt={product.name} width={300} height={300} className="rounded-lg" />
+            <Image
+              src={product.image}
+              alt={product.name}
+              width={300}
+              height={300}
+              className="rounded-lg"
+            />
           </div>
           <div className="w-1/2 h-[300px] bg-gray-100 p-6 rounded-lg flex flex-col justify-between">
-            <h1 className="text-2xl font-bold break-words">{product.name}</h1>
+<h1 className={`${prostoOne.className} text-2xl font-bold break-words`}>{product.name}</h1>
+
             <div className="flex items-center gap-2">
               <span className="text-gray-600">Country:</span>
-              <span className="font-semibold">{product.country}</span>
+<span className={`${montserrat.className} font-semibold`}>{product.country}</span>
+
             </div>
             <div className="flex flex-col mt-4">
-              <span className="text-3xl font-bold">${price}</span>
+<span className={`${montserrat.className} text-3xl font-bold`}>${price}</span>
+
               <input
                 type="range"
                 min="50"
@@ -130,7 +140,10 @@ export default function ProductPage() {
               />
               <span className="text-gray-600">{weight}g</span>
             </div>
-            <button className="bg-black text-white px-6 py-2 rounded-md" onClick={handleAddToCart}>
+            <button
+              className="bg-black text-white px-6 py-2 rounded-md"
+              onClick={handleAddToCart}
+            >
               Add to Cart
             </button>
           </div>
@@ -141,7 +154,10 @@ export default function ProductPage() {
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-6 rounded-lg shadow-lg text-center w-80">
               <p className="text-lg font-semibold">{modalMessage}</p>
-              <button onClick={() => setShowModal(false)} className="mt-4 px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800">
+              <button
+                onClick={() => setShowModal(false)}
+                className="mt-4 px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800"
+              >
                 OK
               </button>
             </div>
@@ -150,17 +166,33 @@ export default function ProductPage() {
 
         {/* Блок информации о чае */}
         <div className="mt-8 p-6 bg-gray-100 rounded-lg">
-          <h2 className="text-xl font-bold mb-4">Brewing Instructions</h2>
-          <p><strong>Serving Size:</strong> 2 tsp per cup, 6 tsp per pot</p>
-          <p><strong>Water Temperature:</strong> 100°C</p>
-          <p><strong>Brewing Time:</strong> 3 - 5 minutes</p>
+<h2 className={`${prostoOne.className} text-xl font-bold mb-4`}>Brewing Instructions</h2>
 
-          <h2 className="text-xl font-bold mt-6">About This Tea</h2>
+          <p>
+            <strong>Serving Size:</strong> 2 tsp per cup, 6 tsp per pot
+          </p>
+          <p>
+            <strong>Water Temperature:</strong> 100°C
+          </p>
+          <p>
+            <strong>Brewing Time:</strong> 3 - 5 minutes
+          </p>
+
+<h2 className={`${prostoOne.className} text-xl font-bold mt-6`}>About This Tea</h2>
+
           <div className="grid grid-cols-2 gap-4">
-            <p><strong>Flavor:</strong> {product.flavor}</p>
-            <p><strong>Qualities:</strong> {product.qualities}</p>
-            <p><strong>Caffeine:</strong> {product.caffeine}</p>
-            <p><strong>Allergens:</strong> {product.allergens}</p>
+            <p>
+              <strong>Flavor:</strong> {product.flavor}
+            </p>
+            <p>
+              <strong>Qualities:</strong> {product.qualities}
+            </p>
+            <p>
+              <strong>Caffeine:</strong> {product.caffeine}
+            </p>
+            <p>
+              <strong>Allergens:</strong> {product.allergens}
+            </p>
           </div>
         </div>
       </div>

@@ -26,7 +26,7 @@ export default function AdminPage() {
       const parsedUser = JSON.parse(storedUser);
       setUser(parsedUser);
     } catch (error) {
-      console.error("Ошибка парсинга пользователя:", error);
+      console.error("Error parsing user:", error);
       router.push("/account");
     }
   }, []);
@@ -47,7 +47,7 @@ export default function AdminPage() {
           setOrders(data.orders || []);
         }
       } catch (error) {
-        console.error("Ошибка загрузки заказов:", error);
+        console.error("Error fetching orders:", error);
       }
     };
 
@@ -58,7 +58,7 @@ export default function AdminPage() {
     fetch("/api/order/statuses")
       .then(res => res.json())
       .then(data => setStatuses(data.statuses))
-      .catch(err => console.error("Ошибка загрузки статусов:", err));
+      .catch(err => console.error("Error fetching statuses:", err));
   }, []);
 
   const handleStatusChange = async (order_id, status_id) => {
@@ -79,7 +79,7 @@ export default function AdminPage() {
         );
       }
     } catch (error) {
-      console.error("Ошибка обновления статуса:", error);
+      console.error("Error updating status:", error);
     }
   };
 
@@ -96,49 +96,49 @@ export default function AdminPage() {
     return (
       <div>
         <Header />
-        <h1>У вас нет доступа</h1>
-        <LogoutButton />
+        <h1>You do not have access</h1>
+        <LogoutButton setUser={setUser}  />
       </div>
     );
   }
 
   return (
-    <div >
+    <div>
       <Header />
       <div className="container mx-auto p-4">
-      <h1 className={`${prostoOne.className} text-[22px] mb-2`}>Админ</h1>
-      <h2 className={`${prostoOne.className} text-[22px] mb-2`}>Заказы</h2>
-      
-      <div className="space-y-4">
-        {orders.length === 0 ? (
-          <p className="text-gray-500">Заказов пока нет</p>
-        ) : (
-          orders.map((order) => (
-            <div key={order.order_id} className="flex justify-between mb-4 p-4 border rounded-lg bg-gray-100">
-              <div className="flex flex-col">
-                <span className="font-semibold">Заказ #{order.order_id}</span>
-                <span className="text-sm text-gray-600">{order.order_date}</span>
-                <span>{order.address} | {order.payment_method}</span>
-                <span>Сумма: ${parseFloat(order.total_amount).toFixed(2)}</span>
-              </div>
+        <h1 className={`${prostoOne.className} text-[22px] mb-2`}>Admin</h1>
+        <h2 className={`${prostoOne.className} text-[22px] mb-2`}>Orders</h2>
 
-              <div>
-                <select 
-                  value={order.status_id} 
-                  onChange={(e) => handleStatusChange(order.order_id, Number(e.target.value))}
-                  className="border px-2 py-1 rounded-md bg-white"
-                >
-                  {statuses.map(status => (
-                    <option key={status.id} value={status.id}>{status.name}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          ))
-        )}
-      </div>
+        <div className={`${montserrat.className} space-y-4`}>
+          {orders.length === 0 ? (
+            <p className="text-gray-500">No orders yet</p>
+          ) : (
+            orders.map((order) => (
+              <div key={order.order_id} className="flex justify-between mb-4 p-4 border rounded-lg bg-gray-100">
+                <div className="flex flex-col">
+                  <span className="font-semibold">Order #{order.order_id}</span>
+                  <span className="text-sm text-gray-600">{order.order_date}</span>
+                  <span>{order.address} | {order.payment_method}</span>
+                  <span>Total: ${parseFloat(order.total_amount).toFixed(2)}</span>
+                </div>
 
-      <LogoutButton />
+                <div>
+                  <select 
+                    value={order.status_id} 
+                    onChange={(e) => handleStatusChange(order.order_id, Number(e.target.value))}
+                    className="border px-2 py-1 rounded-md bg-white"
+                  >
+                    {statuses.map(status => (
+                      <option key={status.id} value={status.id}>{status.name}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        <LogoutButton />
       </div>
     </div>
   );
